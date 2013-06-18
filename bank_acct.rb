@@ -1,25 +1,26 @@
 class BankAccount
-	attr_accessor :balance, :loan_amt
+	attr_accessor :balance, :loan_amt, :name
 
 
 
-	def initialize
-		@balance = 0.00
+	def initialize(name, balance)
+		@balance = balance
 		@loan_amt = 0.00
+		@name = name
 	end
 
-	def deposit_money(deposit)
-		puts "Your previous balance was #{@balance}"
+	def deposit(deposit)
+		puts "#{@name}, your previous balance was #{@balance}"
 		@balance += deposit
 		@balance = @balance.round(2)
-		puts "Your new balance is #{@balance}" 
+		puts "#{@name}, your new balance is #{@balance}" 
 	end
 
-	def withdraw_money(withdraw)
-		puts "Your previous balance was #{@balance}"
+	def withdraw(withdraw)
+		puts "#{@name}, your previous balance was #{@balance}"
 		@balance -= withdraw
 		@balance = @balance.round(2)
-		puts "Your new balance is #{@balance}" 
+		puts "#{@name}, your new balance is #{@balance}" 
 	end
 
 	def get_balance
@@ -40,6 +41,11 @@ class BankAccount
 
 	def get_outstanding_loan
 		puts "Your current balance is #{@loan_amt}"
+	end
+
+	def self.transfer_money(acct_1, acct_2, amount)
+		acct_1.withdraw_money(amount)
+		acct_2.deposit_money(amount)
 	end
 
 	
